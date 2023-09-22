@@ -3,6 +3,7 @@ package com.example.fetchproject
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fetchproject.data.DataService
 import com.example.fetchproject.data.ItemAdapter
@@ -55,5 +56,9 @@ class MainActivity : AppCompatActivity() {
                 Log.e(TAG, "onFailure $t")
             }
         })
+
+        // Inflate RecyclerView
+        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(applicationContext)
     }
 }
