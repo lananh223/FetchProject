@@ -45,8 +45,15 @@ class MainActivity : AppCompatActivity() {
                     Log.w(TAG, "Did not receive a valid response body")
                     return
                 } else {
+                    val sortedItemDataList = itemDataList!!
+                        .sortedWith(
+                            compareBy<ItemData> { it.listId }
+                                .thenBy { it.name }
+                        )
+                        .filter { it.name.isNullOrBlank() }
+
                     recyclerView.adapter = ItemAdapter(
-                        itemDataList!!
+                        sortedItemDataList
                     )
                         .apply {
                             notifyDataSetChanged()
