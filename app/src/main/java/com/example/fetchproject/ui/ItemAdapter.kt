@@ -1,4 +1,4 @@
-package com.example.fetchproject.data
+package com.example.fetchproject.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fetchproject.R
+import com.example.fetchproject.data.ItemData
 
 class ItemAdapter(private val itemDataList: List<ItemData>) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {

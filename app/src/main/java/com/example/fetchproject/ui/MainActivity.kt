@@ -1,12 +1,12 @@
-package com.example.fetchproject
+package com.example.fetchproject.ui
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fetchproject.R
 import com.example.fetchproject.data.DataService
-import com.example.fetchproject.data.ItemAdapter
 import com.example.fetchproject.data.ItemData
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -44,12 +44,14 @@ class MainActivity : AppCompatActivity() {
                 if (itemDataList == null) {
                     Log.w(TAG, "Did not receive a valid response body")
                     return
+                } else {
+                    recyclerView.adapter = ItemAdapter(
+                        itemDataList!!
+                    )
+                        .apply {
+                            notifyDataSetChanged()
+                        }
                 }
-
-                recyclerView.adapter = ItemAdapter(itemDataList!!)
-                    .apply {
-                        notifyDataSetChanged()
-                    }
             }
 
             override fun onFailure(call: Call<List<ItemData>>, t: Throwable) {
