@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.fetchproject.R
 import com.example.fetchproject.data.DataService
 import com.example.fetchproject.data.ItemData
+import com.example.fetchproject.databinding.ActivityMainBinding
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,11 +19,13 @@ private const val BASE_URL = "https://fetch-hiring.s3.amazonaws.com/"
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityMainBinding
     private var itemDataList: List<ItemData>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         //Set up retrofit to fetch data
         val gson = GsonBuilder().create()
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                         )
                         .filter { it.name.isNullOrBlank() }
 
-                    recyclerView.adapter = ItemAdapter(
+                    binding.recyclerView.adapter = ItemAdapter(
                         sortedItemDataList
                     )
                         .apply {
@@ -66,8 +67,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // Inflate RecyclerView
-        recyclerView = findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+        binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
     }
 }
