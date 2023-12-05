@@ -16,11 +16,11 @@ class ItemRepository {
     private val itemService: ItemService = retrofit.create(ItemService::class.java)
 
     suspend fun fetchData(): List<ItemData> {
-        val result = itemService.fetchData()
-        return result.sortedWith(
-            compareBy<ItemData> { it.listId }
-                .thenBy { it.id }
-                .thenBy { it.name }
-        ).filter { !it.name.isNullOrBlank() }
+        val result = itemService.fetchData().let { data ->
+            data.sortedBy { it.id }
+                .sortedBy { it.listId }
+                .filter { it.name.isNullOrBlank() }
+        }
+        return result
     }
 }
