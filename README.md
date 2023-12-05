@@ -16,3 +16,5 @@
   * API call using: Retrofit, Gson, Corountines
   * UI Design: Jetpack Compose
 
+FYI: https://fetch-hiring.s3.amazonaws.com/mobile.html
+
